@@ -3,12 +3,12 @@
 Summary:	An Apache virus scanning filter
 Summary(pl):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
-Version:	0.13
+Version:	0.21
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://software.othello.ch/mod_clamav/mod_%{mod_name}-%{version}.tar.gz
-# Source0-md5:	e6cc9a4d7a1b29a38ca4c42d85fe8ef6
+# Source0-md5:	98bd0d8628be8ddeae21da6623e57d20
 Source1:	%{name}.conf
 Patch0:		%{name}-libtool-tag.patch
 URL:		http://software.othello.ch/mod_clamav/
@@ -61,7 +61,7 @@ export CPPFLAGS
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
 
-install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
+install .libs/mod_%{mod_name}.0.0.0 $RPM_BUILD_ROOT%{_pkglibdir}/mod_%{mod_name}.so
 
 CFG="$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf"
 install %{SOURCE1} ${CFG}/32_mod_clamav.conf
