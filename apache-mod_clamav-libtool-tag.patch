@@ -1,0 +1,10 @@
+--- Makefile.am~	2003-11-11 10:37:30.000000000 +0100
++++ Makefile.am	2003-12-29 11:52:20.264607184 +0100
+@@ -16,6 +16,7 @@
+ INC = @CPPFLAGS@
+ LIB = @LIBS@
+ AM_CFLAGS = @CFLAGS@
++LIBTOOL = @LIBTOOL@ --tag CC
+ 
+ #   the default target
+ lib_LTLIBRARIES = mod_clamav.la
