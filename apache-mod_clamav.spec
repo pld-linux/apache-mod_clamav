@@ -18,9 +18,8 @@ BuildRequires:	apr-devel
 BuildRequires:	apr-util-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bzip2-devel
 BuildRequires:	clamav-devel
-BuildRequires:	gmp-devel
+BuildRequires:	libtool
 Requires:	apache >= 2
 Requires:	apache-mod_proxy
 Requires:	clamav
@@ -44,14 +43,15 @@ skanera antywirusowego Clamav.
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p0
 
+%{__perl} -pi -e 's/(-module)/$1 -avoid-version/' Makefile.am
+
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 
 CPPFLAGS="-I `/usr/bin/apr-config --includedir` -I `/usr/bin/apu-config --includedir`"
-export CPPFLAGS
-
 %configure \
 	--with-apxs=%{apxs}
 
@@ -61,7 +61,7 @@ export CPPFLAGS
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
 
-install .libs/mod_%{mod_name}.0.0.0 $RPM_BUILD_ROOT%{_pkglibdir}/mod_%{mod_name}.so
+install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}/mod_%{mod_name}.so
 
 CFG="$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf"
 install %{SOURCE1} ${CFG}/32_mod_clamav.conf
