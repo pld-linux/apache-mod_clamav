@@ -3,11 +3,12 @@
 Summary:	An Apache virus scanning filter
 Summary(pl):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
-Version:	0.12
+Version:	0.13
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://software.othello.ch/mod_clamav/mod_%{mod_name}-%{version}.tar.gz
+# Source0-md5:	e6cc9a4d7a1b29a38ca4c42d85fe8ef6
 Source1:	%{name}.conf
 Patch0:		%{name}-libtool-tag.patch
 URL:		http://software.othello.ch/mod_clamav/
@@ -17,6 +18,9 @@ BuildRequires:	apr-devel
 BuildRequires:	apr-util-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bzip2-devel
+BuildRequires:	clamav-devel
+BuildRequires:	gmp-devel
 Requires:	apache >= 2
 Requires:	apache-mod_proxy
 Requires:	clamav
