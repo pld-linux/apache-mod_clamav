@@ -1,7 +1,8 @@
-# $Revision: 1.1 $
+# $Revision: 1.2 $
 %define 	apxs	/usr/sbin/apxs
 %define         mod_name        clamav
-Summary:	an Apache virus scanning filter
+Summary:	An Apache virus scanning filter
+Summary(pl):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
 Version:	0.12
 Release:	1
@@ -12,11 +13,11 @@ Source1:	%{name}.conf
 Patch0:		%{name}-libtool-tag.patch
 URL:		http://software.othello.ch/mod_clamav/
 BuildRequires:	%{apxs}
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	apache-devel
 BuildRequires:	apr-devel
 BuildRequires:	apr-util-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 Requires:	apache >= 2
 Requires:	apache-mod_proxy
 Requires:	clamav
@@ -31,6 +32,11 @@ mod_clamav is an Apache 2 filter which scans the content delivered by
 the proxy module (mod_proxy) for viruses using the Clamav virus
 scanning engine.
 
+%description -l pl
+mod_clamav to filtr dla serwera Apache 2 skanuj±cy tre¶ci dostarczane
+przez modu³ proxy (mod_proxy) pod k±tem wirusów przy u¿yciu silnika
+skanera antywirusowego Clamav.
+
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p0
@@ -40,8 +46,7 @@ scanning engine.
 %{__autoconf}
 %{__automake}
 
-CPPFLAGS="${CPPFLAGS} -I `/usr/bin/apr-config --includedir`"
-CPPFLAGS="${CPPFLAGS} -I `/usr/bin/apu-config --includedir`"
+CPPFLAGS="-I `/usr/bin/apr-config --includedir` -I `/usr/bin/apu-config --includedir`"
 export CPPFLAGS
 
 %configure \
@@ -51,8 +56,8 @@ export CPPFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
+
 install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 
 CFG="$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf"
@@ -63,16 +68,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 if [ -f /var/lock/subsys/httpd ]; then
-   /etc/rc.d/init.d/httpd restart 1>&2
+	/etc/rc.d/init.d/httpd restart 1>&2
 else
-   echo "Run \"/etc/rc.d/init.d/httpd start\" to start apache http daemon."
+	echo "Run \"/etc/rc.d/init.d/httpd start\" to start apache http daemon."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-    if [ -f /var/lock/subsys/httpd ]; then
-	/etc/rc.d/init.d/httpd restart 1>&2
-    fi
+	if [ -f /var/lock/subsys/httpd ]; then
+		/etc/rc.d/init.d/httpd restart 1>&2
+	fi
 fi
 
 %files
