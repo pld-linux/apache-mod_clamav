@@ -26,7 +26,7 @@ Requires:	clamav
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
-%define		_sysconfdir	/etc/httpd
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
 %define		_libexecdir	%{_libdir}/apache
 
 %description
