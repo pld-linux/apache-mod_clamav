@@ -1,6 +1,6 @@
-# $Revision: 1.2 $
-%define 	apxs	/usr/sbin/apxs
-%define         mod_name        clamav
+# $Revision: 1.3 $
+%define 	apxs		/usr/sbin/apxs
+%define		mod_name	clamav
 Summary:	An Apache virus scanning filter
 Summary(pl):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
@@ -24,8 +24,8 @@ Requires:	clamav
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
-%define         _sysconfdir     /etc/httpd
-%define         _libexecdir     %{_libdir}/apache
+%define		_sysconfdir	/etc/httpd
+%define		_libexecdir	%{_libdir}/apache
 
 %description
 mod_clamav is an Apache 2 filter which scans the content delivered by
@@ -50,7 +50,7 @@ CPPFLAGS="-I `/usr/bin/apr-config --includedir` -I `/usr/bin/apu-config --includ
 export CPPFLAGS
 
 %configure \
-        --with-apxs=%{apxs}
+	--with-apxs=%{apxs}
 
 %{__make}
 
@@ -61,7 +61,7 @@ install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
 install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}
 
 CFG="$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf"
-install %{SOURCE1}  ${CFG}/32_mod_clamav.conf
+install %{SOURCE1} ${CFG}/32_mod_clamav.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
