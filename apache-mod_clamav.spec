@@ -1,4 +1,3 @@
-# $Revision: 1.3 $
 %define 	apxs		/usr/sbin/apxs
 %define		mod_name	clamav
 Summary:	An Apache virus scanning filter
@@ -13,7 +12,7 @@ Source1:	%{name}.conf
 Patch0:		%{name}-libtool-tag.patch
 URL:		http://software.othello.ch/mod_clamav/
 BuildRequires:	%{apxs}
-BuildRequires:	apache-devel
+BuildRequires:	apache-devel >= 2.0
 BuildRequires:	apr-devel
 BuildRequires:	apr-util-devel
 BuildRequires:	autoconf
@@ -82,6 +81,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog COPYING INSTALL mod_clamav.html NEWS README TODO
+%doc AUTHORS ChangeLog mod_clamav.html NEWS README TODO
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd.conf/32_mod_clamav.conf
 %attr(755,root,root) %{_libexecdir}/mod_%{mod_name}.so
