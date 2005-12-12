@@ -86,5 +86,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog mod_clamav.html NEWS README TODO
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd.conf/32_mod_clamav.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/32_mod_clamav.conf
 %attr(755,root,root) %{_libexecdir}/mod_%{mod_name}.so
