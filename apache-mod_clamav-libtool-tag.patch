@@ -8,3 +8,14 @@
  
  #   the default target
  lib_LTLIBRARIES = mod_clamav.la
+--- Makefile.am.save	2005-12-26 21:21:33.000000000 +0200
++++ Makefile.am	2005-12-26 21:21:33.000000000 +0200
+@@ -27,7 +27,7 @@
+ MODULESOURCES = mod_clamav.c
+ 
+ mod_clamav_la_SOURCES = $(MODULESOURCES)
+-mod_clamav_la_LDFLAGS = -module `${APXS} -q LDFLAGS_SHLIB`
++mod_clamav_la_LDFLAGS = -module -avoid-version `${APXS} -q LDFLAGS_SHLIB`
+ mod_clamav_la_CPPFLAGS = -I`${APXS} -q INCLUDEDIR`
+ mod_clamav_la_CFLAGS = `${APXS} -q CFLAGS_SHLIB`
+ CC = `${APXS} -q CC`
