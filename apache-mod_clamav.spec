@@ -3,7 +3,7 @@
 %define 	apxs		/usr/sbin/apxs
 %define		mod_name	clamav
 Summary:	An Apache virus scanning filter
-Summary(pl):	Filtr skanera antywirusowego dla Apache'a
+Summary(pl.UTF-8):   Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
 Version:	0.21
 Release:	0.1
@@ -36,9 +36,9 @@ mod_clamav is an Apache 2 filter which scans the content delivered by
 the proxy module (mod_proxy) for viruses using the Clamav virus
 scanning engine.
 
-%description -l pl
-mod_clamav to filtr dla serwera Apache 2 skanuj±cy tre∂ci dostarczane
-przez modu≥ proxy (mod_proxy) pod k±tem wirusÛw przy uøyciu silnika
+%description -l pl.UTF-8
+mod_clamav to filtr dla serwera Apache 2 skanujƒÖcy tre≈õci dostarczane
+przez modu≈Ç proxy (mod_proxy) pod kƒÖtem wirus√≥w przy u≈ºyciu silnika
 skanera antywirusowego Clamav.
 
 %prep
