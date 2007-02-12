@@ -3,7 +3,7 @@
 %define 	apxs		/usr/sbin/apxs
 %define		mod_name	clamav
 Summary:	An Apache virus scanning filter
-Summary(pl.UTF-8):   Filtr skanera antywirusowego dla Apache'a
+Summary(pl.UTF-8):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
 Version:	0.21
 Release:	0.1
