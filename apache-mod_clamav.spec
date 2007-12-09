@@ -14,7 +14,7 @@ Source0:	http://software.othello.ch/mod_clamav/mod_%{mod_name}-%{version}.tar.gz
 Source1:	%{name}.conf
 Patch0:		%{name}-libtool-tag.patch
 URL:		http://software.othello.ch/mod_clamav/
-BuildRequires:	apache-apxs >= 2.0
+BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	apr-devel >= 1:1.0
 BuildRequires:	apr-util-devel >= 1:1.0
