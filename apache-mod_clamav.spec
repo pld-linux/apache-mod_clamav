@@ -8,7 +8,7 @@ Name:		apache-mod_%{mod_name}
 Version:	0.21
 Release:	0.1
 License:	GPL
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://software.othello.ch/mod_clamav/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	98bd0d8628be8ddeae21da6623e57d20
 Source1:	%{name}.conf
