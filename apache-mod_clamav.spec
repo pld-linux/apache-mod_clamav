@@ -29,7 +29,7 @@ Requires:	clamav
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)/conf.d
 
 %description
 mod_clamav is an Apache 2 filter which scans the content delivered by
@@ -58,10 +58,10 @@ CPPFLAGS="-I `/usr/bin/apr-1-config --includedir` -I `/usr/bin/apu-1-config --in
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
+install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}}
 
 install .libs/mod_%{mod_name}.so $RPM_BUILD_ROOT%{_pkglibdir}/mod_%{mod_name}.so
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/32_mod_clamav.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/32_mod_clamav.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,5 +77,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog mod_clamav.html NEWS README TODO
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
