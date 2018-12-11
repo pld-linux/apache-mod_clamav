@@ -4,21 +4,23 @@ Summary:	An Apache virus scanning filter
 Summary(pl.UTF-8):	Filtr skanera antywirusowego dla Apache'a
 Name:		apache-mod_%{mod_name}
 Version:	0.23
-Release:	2
-License:	GPL
+Release:	3
+License:	GPL v2
 Group:		Networking/Daemons/HTTP
 Source0:	http://software.othello.ch/mod_clamav/mod_%{mod_name}-%{version}.tar.gz
 # Source0-md5:	32c7b285dfdff5d13371b92ebe73b352
 Source1:	%{name}.conf
+Patch0:		%{name}-clamav.patch
 URL:		http://software.othello.ch/mod_clamav/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0
 BuildRequires:	apr-devel >= 1:1.0
 BuildRequires:	apr-util-devel >= 1:1.0
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.12
 BuildRequires:	automake
 BuildRequires:	clamav-devel
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apache-mod_proxy
@@ -40,14 +42,14 @@ skanera antywirusowego Clamav.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
+%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-
-CPPFLAGS="-I `/usr/bin/apr-1-config --includedir` -I `/usr/bin/apu-1-config --includedir`"
+CPPFLAGS="-I$(/usr/bin/apr-1-config --includedir) -I$(/usr/bin/apu-1-config --includedir) $(pkg-config --cflags libclamav)"
 %configure \
 	--with-apxs=%{apxs}
 %{__make}
@@ -73,5 +75,5 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog mod_clamav.html NEWS README TODO
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*_mod_%{mod_name}.conf
-%attr(755,root,root) %{_pkglibdir}/*.so
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*_mod_clamav.conf
+%attr(755,root,root) %{_pkglibdir}/mod_clamav.so

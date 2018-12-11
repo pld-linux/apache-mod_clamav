@@ -1,0 +1,19 @@
+--- mod_clamav-0.23/filter.c.orig	2009-04-11 01:32:37.000000000 +0200
++++ mod_clamav-0.23/filter.c	2018-12-11 21:11:10.654402097 +0100
+@@ -142,8 +142,16 @@
+     switch (rec->mode) {
+     case MOD_CLAMAV_LOCAL:
+ 	/* virus scan using local clamav library */
++#ifdef CL_SCAN_ARCHIVE
+ 	return cl_scanfile(ctx->filename, virname, (unsigned long *)len,
+ 	    rec->common->local->engine, CL_SCAN_ARCHIVE);
++#else
++	{
++	    struct cl_scan_options scanoptions = {0, CL_SCAN_PARSE_ARCHIVE, 0, 0, 0};
++	    return cl_scanfile(ctx->filename, virname, (unsigned long *)len,
++			       rec->common->local->engine, &scanoptions);
++	}
++#endif
+ 	break;
+     case MOD_CLAMAV_DAEMON:
+ 	/* set reasonable defaults for virname */
