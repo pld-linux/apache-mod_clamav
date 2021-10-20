@@ -1,0 +1,11 @@
+--- mod_clamav-0.23/mod_clamav.h~	2009-04-11 01:37:29.000000000 +0200
++++ mod_clamav-0.23/mod_clamav.h	2021-10-20 22:57:08.055181300 +0200
+@@ -98,7 +98,7 @@
+ #define MOD_CLAMAV_INFECTED_STATUS	"INFECTED"
+ #define MOD_CLAMAV_FAILED_STATUS	"failed"
+ 
+-module AP_MODULE_DECLARE_DATA clamav_module;
++extern module AP_MODULE_DECLARE_DATA clamav_module;
+ 
+ /* the clamav statistics context */
+ #define	VIRUS_LIST_LENGTH	10
